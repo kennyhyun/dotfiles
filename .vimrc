@@ -23,6 +23,10 @@ if dein#load_state(s:path)
   call dein#begin(s:path, [expand('<sfile>'), s:toml_path, s:toml_lazy_path])
   call dein#load_toml(s:toml_path, { 'lazy': 0 })
   call dein#load_toml(s:toml_lazy_path, { 'lazy': 1 })
+
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
   call dein#end()
   call dein#save_state()
 endif
@@ -47,7 +51,7 @@ set langmenu=en_US
 let $LANG = 'en_US'
 
 " Use `colorscheme random` to look for new theme.
-colorscheme flatlandia
+" colorscheme flatlandia
 highlight LineNr ctermfg=241
 highlight htmlH1 term=underline ctermfg=228 guifg=#f6f080
 highlight htmlH2 term=underline ctermfg=228 guifg=#f6f080
@@ -96,6 +100,7 @@ set re=1
 "===============================
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufRead,BufNewFile *.js.flow set filetype=javascript
+autocmd BufRead,BufNewFile *.ts set filetype=typescript
 
 "===============================
 " File specific indentation
@@ -122,7 +127,44 @@ nnoremap <Leader>< :exe "vertical resize " . (winwidth(0) * 4 / 5)<CR>
 nnoremap <Leader>+ :exe "resize " . (winheight(0) * 5 / 4)<CR>
 nnoremap <Leader>- :exe "resize " . (winheight(0) * 4 / 5)<CR>
 
+nnoremap <c-p> :GFiles<cr>
+
 " http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
   \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
   \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+"let g:syntastic_error_symbol = '✗'
+"-------
+" ctags
+"-------
+set tags=./tags,./TAGS,tags;~,TAGS;~
+
+
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#print_width = 80
+let g:prettier#config#single_quote = 'true'
+
+let g:ale_lint_delay = 1000
+"let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'normal'
+
+:set directory=$HOME/.vim/swapfiles//
+
+let g:pymode_python = 'python3'
+
+" Specify the path to `coverage.json` file relative to your current working directory.
+let g:coverage_json_report_path = 'coverage/coverage.json'
+
+" Define the symbol display for covered lines
+let g:coverage_sign_covered = '⦿'
+
+" Define the interval time of updating the coverage lines
+let g:coverage_interval = 5000
+
+" Do not display signs on covered lines
+let g:coverage_show_covered = 0
+
+" Display signs on uncovered lines
+let g:coverage_show_uncovered = 1

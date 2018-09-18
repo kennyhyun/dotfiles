@@ -1,0 +1,10 @@
+#!/bin/sh
+sudo apt update
+sudo apt upgrade
+sudo apt remove openssh-server
+sudo apt install openssh-server
+
+echo PasswordAuthentication yes | sudo tee -a /etc/ssh/sshd_config
+echo UseDNS no | sudo tee -a /etc/ssh/sshd_config
+sudo mkdir /run/sshd
+

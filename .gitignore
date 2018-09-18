@@ -1,3 +1,7 @@
 .vim/.netrwhist
 .vim/dein
 .vim/spell
+.vim/swapfiles
+/.fzf
+coverage
+

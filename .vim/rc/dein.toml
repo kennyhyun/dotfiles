@@ -1,129 +1,43 @@
 [[plugins]]
-repo = 'AndrewRadev/switch.vim'
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
 repo = 'Quramy/tsuquyomi'
 
 [[plugins]]
-repo = 'Shougo/dein.vim'
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = 'has("nvim")'
-
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
-repo = 'Shougo/vimshell.vim'
-
-[[plugins]]
-repo = 'amix/vim-zenroom2'
-
-[[plugins]]
-repo = 'bling/vim-airline'
-
-[[plugins]]
-repo = 'christoomey/vim-tmux-navigator'
-
-[[plugins]]
-repo = 'dharanasoft/rtf-highlight'
-
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
-
-[[plugins]]
-repo = 'flazz/vim-colorschemes'
-
-[[plugins]]
-repo = 'gorodinskiy/vim-coloresque'
-
-[[plugins]]
-repo = 'gregsexton/gitv'
-
-[[plugins]]
-repo = 'haya14busa/incsearch.vim'
-
-[[plugins]]
-repo = 'idanarye/vim-merginal'
-
-[[plugins]]
-repo = 'jordwalke/flatlandia'
-depends = 'vim-airline'
-
-[[plugins]]
 repo = 'junegunn/goyo.vim'
 
 [[plugins]]
-repo = 'junegunn/vim-easy-align'
-
-[[plugins]]
-repo = 'kana/vim-textobj-user'
-
-[[plugins]]
-repo = 'kana/vim-textobj-line'
-
-[[plugins]]
-repo = 'kana/vim-textobj-user'
-
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'Lokaltog/vim-easymotion'
-
-[[plugins]]
-repo = 'mhinz/vim-signify'
-
-[[plugins]]
-repo = 'w0rp/ale'
-
-[[plugins]]
-repo = 'ntpeters/vim-better-whitespace'
-
-[[plugins]]
-repo = 'othree/html5.vim'
-
-[[plugins]]
-repo = 'reedes/vim-pencil'
-
-[[plugins]]
-repo = 'scrooloose/nerdcommenter'
-
-[[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'roxma/nvim-yarp'
 if = '!has("nvim")'
 
 [[plugins]]
-repo = 'shuhei/asu2dark.vim'
+repo = 'roxma/vim-hug-neovim-rpc'
+if = '!has("nvim")'
 
 [[plugins]]
-repo = 'shuhei/vim-jours'
+repo = 'prettier/vim-prettier'
+rev = '0.2.4'
 
 [[plugins]]
-repo = 'thinca/vim-quickrun'
+repo = 'bling/vim-airline' # file tabs
 
 [[plugins]]
-repo = 'tpope/vim-endwise'
+repo = 'w0rp/ale' # asyncrodous linter
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
+repo = 'tpope/vim-unimpaired' # q], q[
 
 [[plugins]]
-repo = 'tpope/vim-projectionist'
+repo = 'yardnsm/vim-import-cost' # npm package size
+on_ft = 'javascript'
+build = 'npm install'
 
 [[plugins]]
-repo = 'tpope/vim-repeat'
+repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting
 
 [[plugins]]
-repo = 'tpope/vim-sensible'
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'tpope/vim-unimpaired'
-
-[[plugins]]
-repo = 'tyru/open-browser.vim'
+repo = 'ruanyl/coverage.vim' # test coverage
