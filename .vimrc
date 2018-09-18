@@ -47,7 +47,7 @@ set langmenu=en_US
 let $LANG = 'en_US'
 
 " Use `colorscheme random` to look for new theme.
-colorscheme flatlandia
+" colorscheme flatlandia
 highlight LineNr ctermfg=241
 highlight htmlH1 term=underline ctermfg=228 guifg=#f6f080
 highlight htmlH2 term=underline ctermfg=228 guifg=#f6f080
@@ -126,3 +126,13 @@ nnoremap <Leader>- :exe "resize " . (winheight(0) * 4 / 5)<CR>
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
   \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
   \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+"let g:syntastic_error_symbol = '✗'
+"-------
+" ctags
+"-------
+set tags=./tags,./TAGS,tags;~,TAGS;~
+
+
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#print_width = 120
