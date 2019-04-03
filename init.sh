@@ -44,6 +44,12 @@ ln -s dotfiles/.tmux.conf .tmux.conf
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git dotfiles/.fzf
+ln -s dotfiles/.fzf .fzf
+~/.fzf/install
+
+
 # gitconfig
 echo "[include]
     path = ~/dotfiles/gitconfig" >> ~/.gitconfig

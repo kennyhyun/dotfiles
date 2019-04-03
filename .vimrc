@@ -23,6 +23,10 @@ if dein#load_state(s:path)
   call dein#begin(s:path, [expand('<sfile>'), s:toml_path, s:toml_lazy_path])
   call dein#load_toml(s:toml_path, { 'lazy': 0 })
   call dein#load_toml(s:toml_lazy_path, { 'lazy': 1 })
+
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
   call dein#end()
   call dein#save_state()
 endif
@@ -121,6 +125,8 @@ nnoremap <Leader>> :exe "vertical resize " . (winwidth(0) * 5 / 4)<CR>
 nnoremap <Leader>< :exe "vertical resize " . (winwidth(0) * 4 / 5)<CR>
 nnoremap <Leader>+ :exe "resize " . (winheight(0) * 5 / 4)<CR>
 nnoremap <Leader>- :exe "resize " . (winheight(0) * 4 / 5)<CR>
+
+nnoremap <c-p> :GFiles<cr>
 
 " http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
