@@ -24,3 +24,6 @@ repo = 'w0rp/ale' # asyncrodous linter
 
 [[plugins]]
 repo = 'tpope/vim-unimpaired' # q], q[
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting

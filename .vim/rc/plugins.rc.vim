@@ -302,6 +302,8 @@ if dein#tap('ale')
   let g:ale_lint_on_enter = 0
   nmap <silent> <leader>N <Plug>(ale_previous_wrap)
   nmap <silent> <leader>n <Plug>(ale_next_wrap)
+  let g:ale_linter_aliases = {'ts': ['typescript']}
+  let g:ale_linters = {'ts': ['tslint']}
 endif
 
 if dein#tap('tsuquyomi')
