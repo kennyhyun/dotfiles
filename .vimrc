@@ -142,3 +142,12 @@ set tags=./tags,./TAGS,tags;~,TAGS;~
 
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#print_width = 120
+
+let g:ale_lint_delay = 1000
+"let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'normal'
+
+:set directory=$HOME/.vim/swapfiles//
+
+let g:pymode_python = 'python3'

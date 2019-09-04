@@ -24,3 +24,8 @@ repo = 'w0rp/ale' # asyncrodous linter
 
 [[plugins]]
 repo = 'tpope/vim-unimpaired' # q], q[
+
+[[plugins]]
+repo = 'yardnsm/vim-import-cost' # npm package size
+on_ft = 'javascript'
+build = 'npm install'
