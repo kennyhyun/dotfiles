@@ -29,3 +29,6 @@ repo = 'tpope/vim-unimpaired' # q], q[
 repo = 'yardnsm/vim-import-cost' # npm package size
 on_ft = 'javascript'
 build = 'npm install'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting

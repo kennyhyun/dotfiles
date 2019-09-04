@@ -100,6 +100,7 @@ set re=1
 "===============================
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufRead,BufNewFile *.js.flow set filetype=javascript
+autocmd BufRead,BufNewFile *.ts set filetype=typescript
 
 "===============================
 " File specific indentation
