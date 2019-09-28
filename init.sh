@@ -55,3 +55,6 @@ echo "[include]
     path = ~/dotfiles/gitconfig" >> ~/.gitconfig
 
 popd
+
+# add swapfile dir
+mkdir -p $HOME/.vim/swapfiles
