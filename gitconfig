@@ -7,13 +7,13 @@
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   type = cat-file -t
   dump = cat-file -p
+
   tree = log --graph --decorate --oneline --date=short
-  tree = log --graph --decorate --oneline --date=short
-  froma = "!f() { git fetch && git rebase origin/master; }; f"
-  from = "!f() { git fetch && git rebase origin/develop; }; f"
-  frod = "!f() { git fetch && git rebase origin/develop; }; f"
-  colma = "!f() { git co master && git pull origin master; }; f"
-  colm = "!f() { git co develop && git pull origin develop; }; f"
+  #from = "!f() { git fetch && git rebase origin/develop; }; f"
+  from = pull --rebase origin master
+  frod = pull --rebase origin develop
+
+  colm = "!f() { git co master && git pull origin master; }; f"
   cold = "!f() { git co develop && git pull origin develop; }; f"
 
 [core]
