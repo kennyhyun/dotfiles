@@ -1,0 +1,15 @@
+[github]
+	user = kennyhyun
+
+[alias]
+  st  = status
+  co = checkout
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  tree = log --graph --decorate --oneline --date=short
+
+  type = cat-file -t
+  dump = cat-file -p
+
+  frod = "!f() { git fetch && git rebase origin/develop; }; f"
+  cold = "!f() { git co develop && git pull origin develop; }; f"
