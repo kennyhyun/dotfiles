@@ -8,6 +8,9 @@ brew install the_silver_searcher
 brew install python3
 brew install neovim
 
+# tmux
+brew install reattach-to-user-namespace
+
 # For https://github.com/junegunn/fzf.vim
 brew install fzf
 $(brew --prefix)/opt/fzf/install

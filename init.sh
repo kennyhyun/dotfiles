@@ -7,7 +7,7 @@ Darwin)
   # -- Homebrew
   ~/dotfiles/brew.sh
   # -- Karabiner
-  ln -s dotfiles/karabiner ~/.config
+  ln -s dotfiles/karabiner ~/.config/
   # To maximize MacVim's window horizontally as well as vertically
   defaults write org.vim.MacVim MMZoomBoth 1
   ;;

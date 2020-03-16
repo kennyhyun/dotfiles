@@ -1,88 +1,112 @@
 [[plugins]]
+# :Switch - toggle true/false, styles
 repo = 'AndrewRadev/switch.vim'
 
 [[plugins]]
+# ,,s - jump to the character
 repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+# Interactive command execution in Vim
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-[[plugins]]
-repo = 'Shougo/vimshell.vim'
+#[[plugins]]
+#repo = 'Shougo/vimshell.vim'
 
 [[plugins]]
+# lean & mean status/tabline
 repo = 'bling/vim-airline'
 
 [[plugins]]
+# navigation between tmux panes
 repo = 'christoomey/vim-tmux-navigator'
 
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
+#[[plugins]]
+# maintain consistent coding styles
+#repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
+# a repository viewer similar to gitk
 repo = 'gregsexton/gitv'
 
 [[plugins]]
+# /\v - Improved incremental searching
 repo = 'haya14busa/incsearch.vim'
 
-[[plugins]]
-repo = 'idanarye/vim-merginal'
+#[[plugins]]
+# Fugitive extension to manage and merge Git branches # requires fugitive
+#repo = 'idanarye/vim-merginal'
 
 # https://github.com/Shougo/dein.vim/issues/74#issuecomment-237198717
 [[plugins]]
+# fuzzy finder
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
 
 [[plugins]]
+# fuzzy finder
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 
 [[plugins]]
+# :Goyo - Distraction-free writing
 repo = 'junegunn/goyo.vim'
 
 [[plugins]]
+# alignment plugin
 repo = 'junegunn/vim-easy-align'
 
 [[plugins]]
+# text objects to select a portion of the current line ; requires kana/vim-textobj-user
 repo = 'kana/vim-textobj-line'
-
 [[plugins]]
+# writing user-defined text objects
 repo = 'kana/vim-textobj-user'
 
 [[plugins]]
+# show VCS difference in the sign column
 repo = 'mhinz/vim-signify'
 
 [[plugins]]
+# Intellisense engine
 repo = 'neoclide/coc.nvim'
 rev = 'release'
 
 [[plugins]]
+# all trailing whitespaces to be highlighted
 repo = 'ntpeters/vim-better-whitespace'
 
 [[plugins]]
+# a tool for writers with auto wordwrap and so on
 repo = 'reedes/vim-pencil'
 
 [[plugins]]
+# 4,cl - comments multiple lines out
 repo = 'scrooloose/nerdcommenter'
 
-[[plugins]]
-repo = 'shuhei/asu2dark.vim'
+# [[plugins]]
+# Color scheme with dark background and vivid colors
+# repo = 'shuhei/asu2dark.vim'
 
 [[plugins]]
+# :JoursEditToday - opens the daily journal markdown
 repo = 'shuhei/vim-jours'
 
-[[plugins]]
-repo = 'tpope/vim-endwise'
+#[[plugins]]
+## wisely add "end" in ruby
+#repo = 'tpope/vim-endwise'
 
 [[plugins]]
+# A Git wrapper
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+# enable repeating supported plugin maps with '.'
 repo = 'tpope/vim-repeat'
 
 [[plugins]]
@@ -95,6 +119,7 @@ repo = 'tpope/vim-surround'
 repo = 'tpope/vim-unimpaired'
 
 [[plugins]]
+# open in browser
 repo = 'tyru/open-browser.vim'
 
 # -- Colorschemes

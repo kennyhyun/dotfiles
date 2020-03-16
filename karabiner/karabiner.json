@@ -1,6 +1,6 @@
 {
     "global": {
-        "check_for_updates_on_startup": true,
+        "check_for_updates_on_startup": false,
         "show_in_menu_bar": true,
         "show_profile_name_in_menu_bar": false
     },
@@ -16,80 +16,109 @@
                 },
                 "rules": [
                     {
-                        "description": "Change left_control+hjkl to arrow keys",
+                        "description": "Home to LCMD + Left",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^org\\.vim\\.",
+                                            "^com.googlecode.iterm2",
+                                            "^com.microsoft.VSCode",
+                                            "^com.apple.Terminal"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "home"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "End to LCMD + Right",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^org\\.vim\\.",
+                                            "^com.googlecode.iterm2",
+                                            "^com.microsoft.VSCode",
+                                            "^com.apple.Terminal"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "end"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "LCTRL + Home to Home",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "h",
+                                    "key_code": "home",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_control"
                                         ],
                                         "optional": [
-                                            "any"
+                                            "caps_lock",
+                                            "option"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_arrow"
+                                        "key_code": "home"
                                     }
                                 ],
                                 "type": "basic"
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "description": "LCTRL + End to End",
+                        "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "j",
+                                    "key_code": "end",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_control"
                                         ],
                                         "optional": [
-                                            "any"
+                                            "caps_lock",
+                                            "option"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_control"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
+                                        "key_code": "end"
                                     }
                                 ],
                                 "type": "basic"
@@ -105,38 +134,151 @@
                     "identifiers": {
                         "is_keyboard": true,
                         "is_pointing_device": false,
-                        "product_id": 657,
+                        "product_id": 19,
+                        "vendor_id": 9610
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "application"
+                            },
+                            "to": {
+                                "key_code": "fn"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_command"
+                            },
+                            "to": {
+                                "key_code": "left_option"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_option"
+                            },
+                            "to": {
+                                "key_code": "left_command"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 636,
                         "vendor_id": 1452
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "caps_lock"
+                            },
+                            "to": {
+                                "key_code": "left_control"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "fn"
+                            },
+                            "to": {
+                                "key_code": "left_control"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_control"
+                            },
+                            "to": {
+                                "key_code": "fn"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "disable_built_in_keyboard_if_exists": true,
+                    "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
                     "identifiers": {
                         "is_keyboard": true,
                         "is_pointing_device": false,
-                        "product_id": 4871,
-                        "vendor_id": 65261
+                        "product_id": 17666,
+                        "vendor_id": 2652
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "application"
+                            },
+                            "to": {
+                                "key_code": "fn"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_command"
+                            },
+                            "to": {
+                                "key_code": "left_option"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_option"
+                            },
+                            "to": {
+                                "key_code": "left_command"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "disable_built_in_keyboard_if_exists": true,
+                    "disable_built_in_keyboard_if_exists": false,
                     "fn_function_keys": [],
                     "identifiers": {
                         "is_keyboard": true,
                         "is_pointing_device": false,
-                        "product_id": 256,
-                        "vendor_id": 2131
+                        "product_id": 2,
+                        "vendor_id": 11240
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "application"
+                            },
+                            "to": {
+                                "key_code": "fn"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_command"
+                            },
+                            "to": {
+                                "key_code": "left_option"
+                            }
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_option"
+                            },
+                            "to": {
+                                "key_code": "left_command"
+                            }
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
@@ -145,7 +287,7 @@
                         "key_code": "f1"
                     },
                     "to": {
-                        "key_code": "display_brightness_decrement"
+                        "consumer_key_code": "display_brightness_decrement"
                     }
                 },
                 {
@@ -153,7 +295,7 @@
                         "key_code": "f2"
                     },
                     "to": {
-                        "key_code": "display_brightness_increment"
+                        "consumer_key_code": "display_brightness_increment"
                     }
                 },
                 {
@@ -193,7 +335,7 @@
                         "key_code": "f7"
                     },
                     "to": {
-                        "key_code": "rewind"
+                        "consumer_key_code": "rewind"
                     }
                 },
                 {
@@ -201,7 +343,7 @@
                         "key_code": "f8"
                     },
                     "to": {
-                        "key_code": "play_or_pause"
+                        "consumer_key_code": "play_or_pause"
                     }
                 },
                 {
@@ -209,7 +351,7 @@
                         "key_code": "f9"
                     },
                     "to": {
-                        "key_code": "fastforward"
+                        "consumer_key_code": "fastforward"
                     }
                 },
                 {
@@ -217,7 +359,7 @@
                         "key_code": "f10"
                     },
                     "to": {
-                        "key_code": "mute"
+                        "consumer_key_code": "mute"
                     }
                 },
                 {
@@ -225,7 +367,7 @@
                         "key_code": "f11"
                     },
                     "to": {
-                        "key_code": "volume_decrement"
+                        "consumer_key_code": "volume_decrement"
                     }
                 },
                 {
@@ -233,7 +375,7 @@
                         "key_code": "f12"
                     },
                     "to": {
-                        "key_code": "volume_increment"
+                        "consumer_key_code": "volume_increment"
                     }
                 }
             ],
@@ -242,20 +384,9 @@
                 "delay_milliseconds_before_open_device": 1000
             },
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "caps_lock"
-                    },
-                    "to": {
-                        "key_code": "left_control"
-                    }
-                }
-            ],
+            "simple_modifications": [],
             "virtual_hid_keyboard": {
-                "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,
-                "keyboard_type": "ansi",
                 "mouse_key_xy_scale": 100
             }
         }
