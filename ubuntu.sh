@@ -1,11 +1,10 @@
 sudo apt update
-sudo apt install git tmux docker.io net-tools htop apache2-utils xclip
+sudo apt install git tmux net-tools htop neovim xclip
 
 # neovim needs both of python2 and python3.
 # How can I make it work on both? Maybe install directory?
-sudo apt install python-pip python3-pip neovim
-sudo pip install neovim
-sudo pip3 install neovim
+sudo apt install python3-pip
+sudo pip3 install pynvim
 
 # perf command
 sudo apt install linux-tools-common
@@ -16,5 +15,5 @@ sudo make
 popd
 
 # Node.js
-sudo apt install curl
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+sudo apt install curl zsh
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | zsh

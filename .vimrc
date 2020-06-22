@@ -142,7 +142,8 @@ set tags=./tags,./TAGS,tags;~,TAGS;~
 
 
 let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#print_width = 120
+let g:prettier#config#print_width = 80
+let g:prettier#config#single_quote = 'true'
 
 let g:ale_lint_delay = 1000
 "let g:ale_lint_on_enter = 1
@@ -152,3 +153,18 @@ let g:ale_lint_on_text_changed = 'normal'
 :set directory=$HOME/.vim/swapfiles//
 
 let g:pymode_python = 'python3'
+
+" Specify the path to `coverage.json` file relative to your current working directory.
+let g:coverage_json_report_path = 'coverage/coverage.json'
+
+" Define the symbol display for covered lines
+let g:coverage_sign_covered = '⦿'
+
+" Define the interval time of updating the coverage lines
+let g:coverage_interval = 5000
+
+" Do not display signs on covered lines
+let g:coverage_show_covered = 0
+
+" Display signs on uncovered lines
+let g:coverage_show_uncovered = 1

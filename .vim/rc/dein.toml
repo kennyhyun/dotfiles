@@ -32,3 +32,6 @@ build = 'npm install'
 
 # [[plugins]]
 # repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting
+
+[[plugins]]
+repo = 'ruanyl/coverage.vim' # test coverage
