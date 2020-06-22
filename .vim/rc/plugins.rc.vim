@@ -10,6 +10,7 @@ if dein#tap('neocomplete.vim')
   let g:neocomplete#enable_at_startup = 1
   " Use smartcase.
   let g:neocomplete#enable_smart_case = 1
+  call deoplete#custom#option('smart_case', v:true)
   " Set minimum syntax keyword length.
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
@@ -23,7 +24,7 @@ endif
 
 if dein#tap('deoplete.nvim')
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
+  call deoplete#custom#option('smart_case', v:true)
   inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
   function! s:my_cr_function()
     return pumvisible() ? deoplete#close_popup() : "\<CR>"

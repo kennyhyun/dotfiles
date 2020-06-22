@@ -1,5 +1,5 @@
 sudo apt update
-sudo apt install git tmux net-tools htop neovim xclip
+sudo apt install git tmux net-tools htop neovim xclip silversearcher-ag
 
 # neovim needs both of python2 and python3.
 # How can I make it work on both? Maybe install directory?

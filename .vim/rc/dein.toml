@@ -5,6 +5,12 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
+repo = 'Quramy/tsuquyomi'
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+
+[[plugins]]
 repo = 'roxma/nvim-yarp'
 if = '!has("nvim")'
 
@@ -30,8 +36,8 @@ repo = 'yardnsm/vim-import-cost' # npm package size
 on_ft = 'javascript'
 build = 'npm install'
 
-# [[plugins]]
-# repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting
+[[plugins]]
+repo = 'leafgarland/typescript-vim' # typescript syntax hightlighting
 
 [[plugins]]
 repo = 'ruanyl/coverage.vim' # test coverage
