@@ -2,19 +2,27 @@
 
 pushd ~
 
-# case $(uname -s) in
-# Darwin)
-#   # -- Homebrew
-#   ~/dotfiles/brew.sh
-#   # -- Karabiner
-#   ln -s dotfiles/karabiner ~/.config
-#   # To maximize MacVim's window horizontally as well as vertically
-#   defaults write org.vim.MacVim MMZoomBoth 1
-#   ;;
-# Linux)
-#   ~/dotfiles/ubuntu.sh
-#   ;;
-# esac
+case $(uname -s) in
+Darwin)
+  # -- Homebrew
+  ~/dotfiles/brew.sh
+  # -- Karabiner
+  #ln -s dotfiles/karabiner ~/.config
+  # To maximize MacVim's window horizontally as well as vertically
+  defaults write org.vim.MacVim MMZoomBoth 1
+  ;;
+Linux)
+  ~/dotfiles/ubuntu.sh
+  ;;
+esac
+
+#ohmyzsh
+echo
+echo -----------------------------
+echo Installing ohmyzsh type "exit<RET>" if you see the ohmyzsh logo.
+echo -----------------------------
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 
 # -- Vim
 ln -s dotfiles/.vim .vim

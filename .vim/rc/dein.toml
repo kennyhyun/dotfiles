@@ -4,8 +4,8 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 
-[[plugins]]
-repo = 'Quramy/tsuquyomi'
+#[[plugins]]
+#repo = 'Quramy/tsuquyomi'
 
 [[plugins]]
 repo = 'junegunn/goyo.vim'
