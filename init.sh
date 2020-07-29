@@ -22,7 +22,13 @@ echo -----------------------------
 echo Installing ohmyzsh type "exit<RET>" if you see the ohmyzsh logo.
 echo -----------------------------
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sudo chsh -s $(which zsh) $USER
 
+# Node.js with NVM
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install 12
 
 # -- Vim
 ln -s dotfiles/.vim .vim
