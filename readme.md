@@ -37,7 +37,7 @@ Add `username ALL=(ALL) NOPASSWD:ALL` to the last line
 ## install
 
 ```bash
-git clone https://github.com/kennyhyun/server-dotfiles.git
+git clone https://github.com/kennyhyun/server-dotfiles.git dotfiles
 dotfiles/init.sh
 ```
 
