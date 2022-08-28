@@ -1,0 +1,120 @@
+[[plugins]]
+repo = 'ElmCast/elm-vim'
+on_ft = 'elm'
+
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = '!has("nvim") && has("lua")'
+depends = 'context_filetype.vim'
+on_i = 1
+
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_ft = 'scala'
+
+[[plugins]]
+repo = 'digitaltoad/vim-jade'
+on_ft = 'jade'
+
+[[plugins]]
+repo = 'eagletmt/neco-ghc'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'eagletmt/ghcmod-vim'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+on_ft = [ 'Dockerfile', 'docker-compose' ]
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'flowtype/vim-flow'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'groenewege/vim-less'
+on_ft = 'less'
+
+[[plugins]]
+repo = 'heavenshell/vim-jsdoc'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'hspec/hspec.vim'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'jparise/vim-graphql'
+on_ft = 'graphql'
+
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+on_ft = 'coffee'
+
+[[plugins]]
+repo = 'Quramy/tsuquyomi'
+on_ft = 'typescript'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = 'typescript'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+on_ft = 'scheme'
+
+
+
+[[plugins]]
+repo = 'othree/javascript-libraries-syntax.vim'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'yardnsm/vim-import-cost' # npm package size
+on_ft = 'javascript'
+build = 'npm install'
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
+of_ft = 'markdown'
+
+[[plugins]]
+repo = 'raichoo/purescript-vim'
+on_ft = 'purescript'
+
+[[plugins]]
+repo = 'rhysd/vim-gfm-syntax'
+of_ft = 'markdown'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+
+[[plugins]]
+repo = 'tpope/vim-haml'
+on_ft = 'haml'
+
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'vim-scripts/java.vim'
+on_ft = 'java'

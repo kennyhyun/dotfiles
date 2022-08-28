@@ -1,0 +1,40 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = '!has("nvim")'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tommcdo/vim-fugitive-blame-ext.git'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = '!has("nvim")'
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+#rev = '0.2.4'
+
+[[plugins]]
+repo = 'bling/vim-airline' # file tabs
+
+[[plugins]]
+repo = 'w0rp/ale' # asyncrodous linter
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired' # q], q[
+
+
+[[plugins]]
+repo = 'othree/yajs'
+of_ft = 'javascript'
