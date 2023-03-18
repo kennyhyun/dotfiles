@@ -38,7 +38,7 @@ fi
 
 # Node.js with NVM
 latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
-curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | zsh
+curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 12
