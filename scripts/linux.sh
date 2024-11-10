@@ -28,14 +28,16 @@ if [ "$skip_devtools" ]; then exit 0; fi
 
 sudo apt install -y \
   htop \
-  vim-gtk `# with python-vim` \
+  vim-gtk3 `# with python-vim` \
   silversearcher-ag \
   zsh \
-  graphviz
+  graphviz \
+  pipx \
+  python3-pynvim `# vim plugin` \
+
 
 # pip
-sudo pip3 install \
-  pynvim `# vim plugin` \
+pipx install \
   httpie
 
 # docker-compose
@@ -44,7 +46,7 @@ if [ -f "/usr/local/bin/docker-compose" ]; then
   docker-compose --version
 else
   echo "-----\nInstalling docker-compose...."
-  sudo pip3 install requests --upgrade
+  pipx install requests
   dc_version=${COMPOSE_VERSION:-1.29.2}
   dc_version_url=/docker/compose/releases/download/${dc_version}/docker-compose-$(uname -s)-$(uname -m)
   if [ -z "$dc_version_url" ];then
@@ -58,14 +60,3 @@ else
   fi
 fi
 
-## wordtsar
-mkdir -p ~/.appImages
-wordtsar_bin_url=`http https://sourceforge.net/projects/wordtsar/best_release.json |jq -r '.platform_releases.linux.url'`
-wordtsar_bin_path=$HOME/.appImages/`echo $wordtsar_bin_url | grep -o '\/Releases\/\(.*\)\/WordTsar[^?]\+' | cut -d'/' -f3`.AppImage
-if [ -f "$wordtsar_bin_path" ]; then
-  echo "$wordtsar_bin_path found"
-else
-  wget $wordtsar_bin_url -O $wordtsar_bin_path -q --show-progress --progress=bar:force
-  chmod +x $wordtsar_bin_path
-  sudo ln -sf $wordtsar_bin_path /usr/local/bin/wordtsar
-fi

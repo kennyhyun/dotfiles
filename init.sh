@@ -17,12 +17,13 @@ Linux)
 esac
 
 # pip packages
-sudo pip3 install "awscli<2" httpie
+pipx install "awscli<2"
+export PATH=$PATH:~/.local/bin
 
 # Build git diff-highlight and set as pager
-diff_highlight_dir=`find /usr -name '*diff-highlight' -type d 2>&1 | grep -v "Permission denied"`
-if ! [ -z $diff_highlight_dir ]; then
-  echo Setting up
+diff_highlight_dir=`find /usr -name '*diff-highlight' -type d 2>&1 | grep -v "Permission denied"`|tail -1
+if ! [ -z "$diff_highlight_dir" ]; then
+  echo Setting up $diff_highlight_dir
   pushd $diff_highlight_dir
   sudo make
   git config --global core.pager "$diff_highlight_dir/diff-highlight | less -F -X"
@@ -41,13 +42,7 @@ latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/l
 curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 12
-lerna_ver=$(lerna -v || echo "")
-if [ "$lerna_ver" ]; then
-  echo "lerna $lerna_ver found"
-else
-  npm i -g lerna
-fi
+nvm install 20
 
 # tmux
 ln -sf dotfiles/.tmux.conf .tmux.conf
@@ -61,7 +56,7 @@ npm i -g yarn cross-env pino-pretty
 ######## Dev Tools ##########
 if [ -z "$skip_devtools" ]; then
 
-npm i -g prettier@1.18
+npm i -g prettier #@1.18
 
 #ohmyzsh
 echo
