@@ -40,23 +40,23 @@ sudo apt install -y \
 pipx install \
   httpie
 
-# docker-compose
-if [ -f "/usr/local/bin/docker-compose" ]; then
-  echo "-----\ndocker-compose aleady exists"
-  docker-compose --version
-else
-  echo "-----\nInstalling docker-compose...."
-  pipx install requests
-  dc_version=${COMPOSE_VERSION:-1.29.2}
-  dc_version_url=/docker/compose/releases/download/${dc_version}/docker-compose-$(uname -s)-$(uname -m)
-  if [ -z "$dc_version_url" ];then
-    echo "Could not find the docker-compose url, please install manually from $github_compose_release_url"
-  else
-    docker_compose_url=https://github.com${dc_version_url}
-    echo Downloading: $docker_compose_url
-    sudo wget $docker_compose_url -O /usr/local/bin/docker-compose -q --show-progress --progress=bar:force
-    sudo chmod +x /usr/local/bin/docker-compose
-    docker-compose --version
-  fi
-fi
+## docker-compose
+#if [ -f "/usr/local/bin/docker-compose" ]; then
+#  echo "-----\ndocker-compose aleady exists"
+#  docker-compose --version
+#else
+#  echo "-----\nInstalling docker-compose...."
+#  pipx install requests
+#  dc_version=${COMPOSE_VERSION:-1.29.2}
+#  dc_version_url=/docker/compose/releases/download/${dc_version}/docker-compose-$(uname -s)-$(uname -m)
+#  if [ -z "$dc_version_url" ];then
+#    echo "Could not find the docker-compose url, please install manually from $github_compose_release_url"
+#  else
+#    docker_compose_url=https://github.com${dc_version_url}
+#    echo Downloading: $docker_compose_url
+#    sudo wget $docker_compose_url -O /usr/local/bin/docker-compose -q --show-progress --progress=bar:force
+#    sudo chmod +x /usr/local/bin/docker-compose
+#    docker-compose --version
+#  fi
+#fi
 
