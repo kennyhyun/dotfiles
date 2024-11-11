@@ -10,6 +10,18 @@ else
   perf_package=linux-perf
 fi
 
+if [ -z "$(sudo ls)" ]; then
+  echo "Please install sudo package"
+  echo "eg.
+su -
+apt install sudo
+usermod -a -G sudo USER
+---
+And please login again
+"
+  exit 2
+fi
+
 sudo apt update
 sudo apt install -y \
   $perf_package \
