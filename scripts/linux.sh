@@ -3,6 +3,7 @@ if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
 
+ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
 distro_name=$(lsb_release -i|cut -f2)
 if [ "$distro_name" = "Ubuntu" ]; then
   perf_package=linux-tools-common
@@ -47,10 +48,19 @@ sudo apt install -y \
   pipx \
   python3-pynvim `# vim plugin` \
 
+# delta for gitdiff
+if [ -z "$(delta --version)" ]; then
+  deltaUrl=$(wget -O- -q https://github.com/dandavison/delta/releases | sed -ne "s/^.*\"\([^\"]*delta_[^\"]*_$ARCH\.deb\)\".*/\1/p")
+  echo delta url: $deltaUrl
+  if [ -n "$deltaUrl" ]; then
+    mkdir -p tmp
+    wget https://github.com/$deltaUrl -P tmp/
+    sudo dpkg -i `ls tmp/*.deb` && rm tmp -rf
+  fi
+fi
 
 # pip
-pipx install \
-  httpie
+pipx install httpie
 
 ## docker-compose
 #if [ -f "/usr/local/bin/docker-compose" ]; then

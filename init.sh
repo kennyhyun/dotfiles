@@ -20,15 +20,26 @@ esac
 pipx install "awscli<2"
 export PATH=$PATH:~/.local/bin
 
-# Build git diff-highlight and set as pager
-diff_highlight_dir=`find /usr -name '*diff-highlight' -type d 2>&1 | grep -v "Permission denied"`|tail -1
-if ! [ -z "$diff_highlight_dir" ]; then
-  echo Setting up $diff_highlight_dir
-  pushd $diff_highlight_dir
-  sudo make
-  git config --global core.pager "$diff_highlight_dir/diff-highlight | less -F -X"
-  git config --global interactive.diffFilter "$diff_highlight_dir/diff-highlight"
-  popd
+
+if [ -n "$(delta --version)" ]; then
+  git config --global core.pager delta
+  git config --global interactive.diffFilter "delta --color-only"
+  git config --global delta.navigate true
+  git config --global delta.side-by-side true
+  git config --global merge.conflictstyle zdiff3
+else
+  # Build git diff-highlight and set as pager
+  diff_highlight_dir=`find /usr -name '*diff-highlight' -type d 2>&1 | grep -v "Permission denied"|tail -1`
+  echo diff_highlight_dir: $diff_highlight_dir
+  if ! [ -z "$diff_highlight_dir" ]; then
+    echo Setting up $diff_highlight_dir
+    pushd $diff_highlight_dir
+    sudo make
+    git config --global core.pager "$diff_highlight_dir/diff-highlight | less -F -X"
+    git config --global interactive.diffFilter "$diff_highlight_dir/diff-highlight"
+    popd
+  fi
+
 fi
 
 # zshrc
@@ -61,7 +72,7 @@ npm i -g prettier #@1.18
 #ohmyzsh
 echo
 echo -----------------------------
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || echo ""
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
 echo "Setting the default shell to $(which zsh)"
 sudo chsh -s $(which zsh) $USER
 
