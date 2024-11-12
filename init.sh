@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+role=${1:base}
+
 if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
@@ -13,7 +16,7 @@ mkdir -p Downloads
 # Install system utils and Homebrew
 case $(uname -s) in
 Linux)
-  ~/dotfiles/scripts/linux.sh
+  ~/dotfiles/scripts/linux.sh $role
   ;;
 Darwin)
   ~/dotfiles/scripts/macos.sh
