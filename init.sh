@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+role=${1:base}
+
 if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
@@ -12,7 +15,7 @@ mkdir -p Downloads
 
 case $(uname -s) in
 Linux)
-  ~/dotfiles/scripts/linux.sh
+  ~/dotfiles/scripts/linux.sh $role
   ;;
 esac
 
