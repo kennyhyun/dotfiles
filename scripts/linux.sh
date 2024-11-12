@@ -37,6 +37,7 @@ sudo apt install -y \
   curl \
   default-jre \
   tmux \
+  lshw \
   net-tools
 
 if [ "$skip_devtools" ]; then exit 0; fi
