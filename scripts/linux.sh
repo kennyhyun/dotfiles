@@ -5,6 +5,18 @@ fi
 
 role=${1:base}
 
+if [ "$role" != "base" ]; then
+  echo "============================
+Role: $role
+============================="
+  if [ "$role" = "linuxdev" ]; then
+    echo "Will also install...
+  - terraform
+
+"
+  fi
+fi
+
 ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
 distro_name=$(lsb_release -i|cut -f2)
 if [ "$distro_name" = "Ubuntu" ]; then
@@ -54,7 +66,7 @@ sudo apt install -y \
 if [ "$role" = "linuxdev" ]; then
 
   # terraform
-  wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg -f --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
   sudo apt update && sudo apt install terraform
 

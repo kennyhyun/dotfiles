@@ -205,6 +205,9 @@ echo ---------------------
 echo "
 ----------------------------
 Finished to initiate dotfiles, you can run this again if required.
+
+For more dev env, please consider running \"./scripts/linux.sh linuxdev\"
+
 Please log off and log in again, Thanks!!
 -----------------------------"
 
