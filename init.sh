@@ -102,8 +102,8 @@ fi
 
 # deno
 if ! [ -d "$HOME/.deno" ]; then
-  deno_install=$(curl -fsSL https://deno.land/x/install/install.sh || exit -1)
-  $SHELL -c $deno_install
+  echo "DENO was not found, installing"
+  curl -fsSL https://deno.land/x/install/install.sh | $SHELL
 fi
 
 set +e
