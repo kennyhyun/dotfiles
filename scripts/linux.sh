@@ -25,8 +25,8 @@ Role: $role
   if [ "$role" = "linuxdev" ]; then
     echo "Will also install...
   - terraform
-  - kubectl
-
+  - docker
+  - microk8s
 "
   fi
 fi
@@ -115,4 +115,11 @@ brew install vim neovim graphviz httpie
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
   brew install alacritty
+fi
+
+# kubectl
+if [ -z "$(kubectl version --client)" ]; then
+  echo Installing kubectl
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
 fi
