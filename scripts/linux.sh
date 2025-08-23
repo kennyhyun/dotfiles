@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # linux.sh
 #
 # system utils for Linux
@@ -8,10 +10,8 @@
 # x64, arm64
 #
 
-
 set -e
 
-#!/bin/bash
 if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
@@ -64,22 +64,7 @@ if [ "$skip_devtools" ]; then exit 0; fi
 
 # Install dev tools
 
-sudo apt install -y \
-  vim-gtk3 `# with python-vim` \
-  graphviz \
-  python3-pynvim `# vim plugin` \
-
-# delta for gitdiff
-if [ -z "$(delta --version)" ]; then
-  deltaUrl=$(wget -O- -q https://github.com/dandavison/delta/releases | sed -ne "s/^.*\"\([^\"]*delta_[^\"]*_$ARCH\.deb\)\".*/\1/p")
-  echo delta url: $deltaUrl
-  if [ -n "$deltaUrl" ]; then
-    mkdir -p tmp
-    wget https://github.com/$deltaUrl -P tmp/
-    sudo dpkg -i `ls tmp/*.deb` && rm tmp -rf
-  fi
-fi
-
-# pip
-pipx install httpie
-
+# homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew update
+brew install vim neovim pynvim graphviz httpie
