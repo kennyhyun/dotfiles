@@ -46,7 +46,7 @@ sudo apt install -y \
   apt-transport-https \
   ca-certificates \
   software-properties-common \
-  git \
+  git git-lfs \
   htop \
   python3-pip \
   python3-venv \
@@ -57,6 +57,7 @@ sudo apt install -y \
   tmux \
   silversearcher-ag \
   zsh \
+  lshw \
   net-tools
 
 if [ "$skip_devtools" ]; then exit 0; fi
