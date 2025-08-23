@@ -14,8 +14,8 @@
   from = pull --rebase origin main
   # fetch rebase origin develop
   frod = pull --rebase origin develop
-  # check out to the latest master
-  colm = "!f() { git co master && git pull origin master; }; f"
+  # check out to the latest main
+  colm = "!f() { git co main && git pull origin main; }; f"
   # check out to the latest develop
   cold = "!f() { git co develop && git pull origin develop; }; f"
 
