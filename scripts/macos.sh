@@ -13,7 +13,9 @@ if [ "$PRODUCTION" ]; then
 fi
 
 # homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [ -z "$(which brew || echo '')" ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 brew update
 brew install htop \
@@ -28,8 +30,9 @@ if [ "$skip_devtools" ]; then exit 0; fi
 
 # Install dev tools
 
+pipx install pynvim
+
 brew install git-lfs \
   neovim \
-  pynvim \
   httpie \
   graphviz
