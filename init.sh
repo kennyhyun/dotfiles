@@ -20,6 +20,7 @@ Linux)
   ;;
 Darwin)
   ~/dotfiles/scripts/macos.sh
+  ~/dotfiles/scripts/macos-additional.sh
   ;;
 esac
 
