@@ -73,6 +73,14 @@ if ! [ -d dotfiles/.fzf ]; then
   ~/.fzf/install --all
 fi
 
+# Alacritty
+if [ -z "$(alacritty --version || echo '')" ]; then
+  if [ -d ~/dotfiles/.config/alacritty ]; then
+    mv ~/.config/alacritty ~/.config/alacritty.old
+  fi
+  ln -sf dotfiles/alacritty .config/alacritty
+fi
+
 set +e
 name=$(git config --global user.name)
 if [ -z "$name" ]; then name=$USER; fi
