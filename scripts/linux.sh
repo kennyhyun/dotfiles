@@ -81,29 +81,6 @@ if [ "$skip_devtools" ]; then exit 0; fi
 
 pipx install pynvim
 
-if [ "$role" = "linuxdev" ]; then
-  # terraform
-  if [ -z "$(terraform --version)" ]; then
-    echo Installing terraform
-    #wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg -f --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    #echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
-    sudo apt update && sudo apt install terraform
-  fi
-  if [ -z "$(ansible --version)" ]; then
-    # ansible
-    echo Installing ansible
-    pipx install --include-deps ansible
-  fi
-  if [ -z "$(kubectl version --client)" ]; then
-    echo Installing kubectl
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
-  fi
-
-fi
-
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -112,6 +89,12 @@ fi
 brew update
 brew install vim neovim graphviz httpie
 
+if [ "$role" = "linuxdev" ]; then
+  ./scripts/install_microk8s.sh
+  ./scripts/install_docker.sh
+  brew install opentofu
+fi
+
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
   brew install alacritty
@@ -119,7 +102,8 @@ fi
 
 # kubectl
 if [ -z "$(kubectl version --client)" ]; then
-  echo Installing kubectl
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
+  brew install kubectl
+  # echo Installing kubectl
+  # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  # sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
 fi
