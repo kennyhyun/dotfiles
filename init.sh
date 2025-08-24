@@ -30,11 +30,13 @@ if [ -z "$(grep "$HOME/dotfiles/.zshrc" ~/.zshrc)" ]; then
 fi
 
 # Node.js with NVM
-latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
-curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 20
+if ! [ -d ~/.nvm ]; then
+  latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm install 20
+fi
 
 # tmux
 ln -sf dotfiles/.tmux.conf .tmux.conf
@@ -45,12 +47,14 @@ fi
 npm i -g yarn cross-env pino-pretty prettier
 
 #ohmyzsh
-echo
-echo -----------------------------
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
-# should not use sudo here
-# echo "Setting the default shell to $(which zsh)"
-# sudo chsh -s $(which zsh) $USER
+if ! [ -d ~/.oh-my-zsh ]; then
+  echo
+  echo -----------------------------
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
+  # should not use sudo here
+  # echo "Setting the default shell to $(which zsh)"
+  # sudo chsh -s $(which zsh) $USER
+fi
 
 # -- Vim
 mkdir -p ~/dotfiles/.vim/swapfiles
