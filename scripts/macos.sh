@@ -36,3 +36,6 @@ brew install git-lfs \
   neovim \
   httpie \
   graphviz
+
+# install GUI apps
+brew install alacritty

@@ -72,3 +72,8 @@ if [ -z "$(which brew || echo '')" ]; then
 fi
 brew update
 brew install vim neovim graphviz httpie
+
+if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
+  # install GUI apps
+  brew install alacritty
+fi
