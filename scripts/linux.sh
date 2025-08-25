@@ -79,11 +79,17 @@ if apt-cache show software-properties-common >/dev/null 2>&1; then
   sudo apt install -y software-properties-common
 fi
 
+if [ "$role" = "linuxdev" ]; then
+  ./scripts/install_microk8s.sh
+  ./scripts/install_docker.sh
+  brew install opentofu
+fi
+
 if [ "$skip_devtools" ]; then exit 0; fi
 
 # Install dev tools
 
-pipx install pynvim
+pip3 install --user pynvim
 
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
@@ -92,12 +98,6 @@ if [ -z "$(which brew || echo '')" ]; then
 fi
 brew update
 brew install vim neovim graphviz httpie
-
-if [ "$role" = "linuxdev" ]; then
-  ./scripts/install_microk8s.sh
-  ./scripts/install_docker.sh
-  brew install opentofu
-fi
 
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
