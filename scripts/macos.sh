@@ -39,3 +39,4 @@ brew install git-lfs \
 
 # install GUI apps
 brew install alacritty
+brew install --cask karabiner-elements
