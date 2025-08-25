@@ -86,16 +86,11 @@ if [ "$role" = "linuxdev" ]; then
   $DIR/install_docker.sh
 fi
 
-# homebrew
-if [ -z "$(which brew || echo '')" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
 # kubectl
 if [ -z "$(kubectl version --client)" ]; then
-  brew install kubectl
-  # echo Installing kubectl
-  # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  # sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
+  # Installing kubectl
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$ARCH/kubectl"
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
 fi
 
 if [ "$skip_devtools" ]; then exit 0; fi
