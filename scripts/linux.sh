@@ -82,8 +82,8 @@ if apt-cache show software-properties-common >/dev/null 2>&1; then
 fi
 
 if [ "$role" = "linuxdev" ]; then
-  $DIR/scripts/install_microk8s.sh
-  $DIR/scripts/install_docker.sh
+  $DIR/install_microk8s.sh
+  $DIR/install_docker.sh
   brew install opentofu
 fi
 
