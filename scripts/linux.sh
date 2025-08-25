@@ -16,6 +16,8 @@ if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 role=${1:base}
 
 if [ "$role" != "base" ]; then
@@ -80,8 +82,8 @@ if apt-cache show software-properties-common >/dev/null 2>&1; then
 fi
 
 if [ "$role" = "linuxdev" ]; then
-  ./scripts/install_microk8s.sh
-  ./scripts/install_docker.sh
+  $DIR/scripts/install_microk8s.sh
+  $DIR/scripts/install_docker.sh
   brew install opentofu
 fi
 
