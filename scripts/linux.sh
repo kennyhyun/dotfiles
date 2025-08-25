@@ -84,7 +84,18 @@ fi
 if [ "$role" = "linuxdev" ]; then
   $DIR/install_microk8s.sh
   $DIR/install_docker.sh
-  brew install opentofu
+fi
+
+# homebrew
+if [ -z "$(which brew || echo '')" ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+# kubectl
+if [ -z "$(kubectl version --client)" ]; then
+  brew install kubectl
+  # echo Installing kubectl
+  # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  # sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
 fi
 
 if [ "$skip_devtools" ]; then exit 0; fi
@@ -99,17 +110,10 @@ if [ -z "$(which brew || echo '')" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 brew update
-brew install vim neovim graphviz httpie
+brew install vim neovim graphviz httpie opentofu
 
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
   brew install alacritty
 fi
 
-# kubectl
-if [ -z "$(kubectl version --client)" ]; then
-  brew install kubectl
-  # echo Installing kubectl
-  # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  # sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
-fi
