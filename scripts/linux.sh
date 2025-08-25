@@ -32,7 +32,7 @@ Role: $role
 fi
 
 ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
-distro_name=$(lsb_release -i|cut -f2)
+distro_name=$(grep '^ID=' /etc/os-release | cut -d '=' -f2)
 
 if [ "$distro_name" = "Ubuntu" ]; then
   perf_package=linux-tools-common
