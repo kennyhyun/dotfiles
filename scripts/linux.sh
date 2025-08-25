@@ -60,7 +60,6 @@ sudo apt install -y \
   $perf_package \
   apt-transport-https \
   ca-certificates \
-  software-properties-common \
   git git-lfs \
   htop \
   python3-pip \
@@ -74,6 +73,11 @@ sudo apt install -y \
   zsh \
   lshw \
   net-tools
+
+# Install software-properties-common if available
+if apt-cache show software-properties-common >/dev/null 2>&1; then
+  sudo apt install -y software-properties-common
+fi
 
 if [ "$skip_devtools" ]; then exit 0; fi
 
