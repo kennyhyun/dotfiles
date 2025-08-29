@@ -20,7 +20,7 @@ Linux)
   ;;
 Darwin)
   ~/dotfiles/scripts/macos.sh
-  ~/dotfiles/scripts/macos-additional.sh
+  ~/dotfiles/scripts/macos-additional.sh || echo "skipping"
   ;;
 esac
 
