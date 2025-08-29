@@ -97,11 +97,12 @@ if [ "$skip_devtools" ]; then exit 0; fi
 
 # Install dev tools
 
-pip3 install --user pynvim
+sudo apt install -y python3-pynvim || pip3 install --user pynvim
 
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 brew update

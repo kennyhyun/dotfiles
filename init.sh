@@ -34,9 +34,11 @@ if [ -z "$(grep "$HOME/dotfiles/.zshrc" ~/.zshrc)" ]; then
 fi
 
 # Node.js with NVM
-if ! [ -d ~/.nvm ]; then
-  latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+if [ -z "$(nvm --version 2> /dev/null)" ]; then
+  if ! [ -d ~/.nvm/ ]; then
+    latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+  fi
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   nvm install 20
@@ -81,8 +83,8 @@ if ! [ -d dotfiles/.fzf ]; then
 fi
 
 # Alacritty
-if [ -z "$(alacritty --version || echo '')" ]; then
-  if [ -d ~/dotfiles/.config/alacritty ]; then
+if [ -n "$(alacritty --version 2> /dev/null)" ]; then
+  if [ -d ~/.config/alacritty ]; then
     mv ~/.config/alacritty ~/.config/alacritty.old
   fi
   ln -sf dotfiles/alacritty .config/alacritty
