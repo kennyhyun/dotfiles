@@ -57,6 +57,8 @@ if ! [ -d ~/.oh-my-zsh ]; then
   echo
   echo -----------------------------
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
+fi
+if [ -d ~/.oh-my-zsh ] && [ -z "$(echo $0|grep zsh)" ]; then
   echo "Setting the default shell to $(which zsh)"
   sudo chsh -s $(which zsh) $USER
 fi

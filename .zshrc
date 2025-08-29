@@ -13,3 +13,7 @@ alias gwgrep='grep --color=auto --exclude-dir=.git --exclude-dir=node_modules --
 alias gg="gwgrep"
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
