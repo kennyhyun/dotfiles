@@ -10,37 +10,18 @@ pushd ~
 mkdir -p Projects
 mkdir -p Downloads
 
+# Install system utils and Homebrew
 case $(uname -s) in
 Linux)
   ~/dotfiles/scripts/linux.sh
   ;;
+Darwin)
+  ~/dotfiles/scripts/macos.sh
+  ;;
 esac
 
-# pip packages
-pipx install "awscli<2"
-export PATH=$PATH:~/.local/bin
-
-
-if [ -n "$(delta --version)" ]; then
-  git config --global core.pager delta
-  git config --global interactive.diffFilter "delta --color-only"
-  git config --global delta.navigate true
-  git config --global delta.side-by-side true
-  git config --global merge.conflictstyle zdiff3
-else
-  # Build git diff-highlight and set as pager
-  diff_highlight_dir=`find /usr -name '*diff-highlight' -type d 2>&1 | grep -v "Permission denied"|tail -1`
-  echo diff_highlight_dir: $diff_highlight_dir
-  if ! [ -z "$diff_highlight_dir" ]; then
-    echo Setting up $diff_highlight_dir
-    pushd $diff_highlight_dir
-    sudo make
-    git config --global core.pager "$diff_highlight_dir/diff-highlight | less -F -X"
-    git config --global interactive.diffFilter "$diff_highlight_dir/diff-highlight"
-    popd
-  fi
-
-fi
+brew install awscli
+brew install deno
 
 # zshrc
 if [ -z "$(grep "$HOME/dotfiles/.zshrc" ~/.zshrc)" ]; then
@@ -49,11 +30,13 @@ if [ -z "$(grep "$HOME/dotfiles/.zshrc" ~/.zshrc)" ]; then
 fi
 
 # Node.js with NVM
-latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
-curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 20
+if ! [ -d ~/.nvm ]; then
+  latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm install 20
+fi
 
 # tmux
 ln -sf dotfiles/.tmux.conf .tmux.conf
@@ -61,20 +44,16 @@ if ! [ -d ~/.tmux/plugins/tpm ]; then
   mkdir -p ~/.tmux/plugins
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-
-npm i -g yarn cross-env pino-pretty
-
-######## Dev Tools ##########
-if [ -z "$skip_devtools" ]; then
-
-npm i -g prettier #@1.18
+npm i -g yarn cross-env pino-pretty prettier
 
 #ohmyzsh
-echo
-echo -----------------------------
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
-echo "Setting the default shell to $(which zsh)"
-sudo chsh -s $(which zsh) $USER
+if ! [ -d ~/.oh-my-zsh ]; then
+  echo
+  echo -----------------------------
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
+  echo "Setting the default shell to $(which zsh)"
+  sudo chsh -s $(which zsh) $USER
+fi
 
 # -- Vim
 mkdir -p ~/dotfiles/.vim/swapfiles
@@ -97,10 +76,12 @@ if ! [ -d dotfiles/.fzf ]; then
   ~/.fzf/install --all
 fi
 
-# deno
-if ! [ -d "$HOME/.deno" ]; then
-  echo "DENO was not found, installing"
-  curl -fsSL https://deno.land/x/install/install.sh | $SHELL
+# Alacritty
+if [ -z "$(alacritty --version || echo '')" ]; then
+  if [ -d ~/dotfiles/.config/alacritty ]; then
+    mv ~/.config/alacritty ~/.config/alacritty.old
+  fi
+  ln -sf dotfiles/alacritty .config/alacritty
 fi
 
 set +e
@@ -129,9 +110,6 @@ git config --global user.name <User Name>
 git config --global user.email <Email Address>"
   fi
 fi
-
-fi
-##### Dev tools end ######
 
 ## generate id_rsa
 if [ -f "$HOME/.ssh/id_rsa" ]; then
