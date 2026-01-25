@@ -26,7 +26,7 @@ Role: $role
 ============================="
   if [ "$role" = "linuxdev" ]; then
     echo "Will also install...
-  - terraform
+  - opentofu (terraform)
   - docker
   - microk8s
 "
