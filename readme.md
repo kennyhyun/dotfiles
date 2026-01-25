@@ -2,7 +2,15 @@
 
 This repo is supposed to cloned to a user's home directory
 
-Installs and configure tools for Linux servers
+Installs and configure tools for Linux servers and macOS
+
+## What's included
+
+- **Package Management**: Homebrew for both Linux and macOS
+- **Development Tools**: awscli, deno, Node.js (via nvm), vim, neovim
+- **Shell**: zsh with oh-my-zsh, tmux
+- **Terminal**: Alacritty with custom configuration
+- **Utilities**: git, jq, httpie, fzf, and more
 
 
 ## preparation
@@ -35,6 +43,8 @@ sudo visudo
 Add `username ALL=(ALL) NOPASSWD:ALL` to the last line
 
 ## install
+
+For both Linux and macOS:
 
 ```bash
 git clone https://github.com/kennyhyun/server-dotfiles.git dotfiles
