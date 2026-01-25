@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-role=${1:base}
+role=${1:-base}
 
 if [ "$PRODUCTION" ]; then
   skip_devtools=1

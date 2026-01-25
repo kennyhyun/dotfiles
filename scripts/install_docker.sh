@@ -8,7 +8,7 @@
 set -e
 
 
-if [ -z "$(docker version)" ]; then
+if [ -z "$(docker version 2>/dev/null)" ]; then
 
   # remove conflicting packages
   for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg -y || true; done
@@ -33,4 +33,7 @@ if [ -z "$(docker version)" ]; then
   # Install docker
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+  # Add user to docker group
+  sudo usermod -aG docker $USER
+  echo "Added $USER to docker group. Please log out and back in for changes to take effect."
 fi

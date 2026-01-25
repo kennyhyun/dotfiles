@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# install mictok8s
+# install microk8s
 # ubuntu/debian
 # x64/arm64
 

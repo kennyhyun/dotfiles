@@ -18,7 +18,7 @@ fi
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-role=${1:base}
+role=${1:-base}
 
 if [ "$role" != "base" ]; then
   echo "============================
