@@ -23,6 +23,16 @@ if [ -z "$(docker version 2>/dev/null)" ]; then
   
   OS=$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | tr -d '"')
   
+  # Use correct GPG key URL based on OS
+  if [ "$OS" = "ubuntu" ]; then
+    GPG_URL="https://download.docker.com/linux/ubuntu/gpg"
+  else
+    GPG_URL="https://download.docker.com/linux/debian/gpg"
+  fi
+  
+  sudo curl -fsSL "$GPG_URL" -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
+  
   # Add the repository to Apt sources:
   echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/${OS} \

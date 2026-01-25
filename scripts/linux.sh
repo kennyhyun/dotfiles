@@ -43,12 +43,12 @@ else
 fi
 
 # Stop if sudo is unavailable
-if [ -z "$(sudo ls)" ]; then
-  echo "Please install sudo package"
+if ! sudo -n true 2>/dev/null; then
+  echo "Please install sudo package and configure sudo access"
   echo "eg.
 su -
 apt install sudo
-usermod -a -G sudo USER
+usermod -a -G sudo $USER
 ---
 And please login again
 "
