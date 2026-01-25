@@ -34,9 +34,9 @@ Role: $role
 fi
 
 ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
-distro_name=$(grep '^ID=' /etc/os-release | cut -d '=' -f2)
+distro_name=$(grep '^ID=' /etc/os-release | cut -d '=' -f2 | tr -d '"')
 
-if [ "$distro_name" = "Ubuntu" ]; then
+if [ "$distro_name" = "ubuntu" ]; then
   perf_package=linux-tools-common
 else
   perf_package=linux-perf
@@ -88,7 +88,7 @@ fi
 
 # kubectl
 if [ -z "$(kubectl version --client 2> /dev/null)" ]; then
-  echo Installing kubectl
+  echo "Installing kubectl"
   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$ARCH/kubectl"
   sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
 fi
