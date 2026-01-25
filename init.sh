@@ -51,9 +51,8 @@ if ! [ -d ~/.oh-my-zsh ]; then
   echo
   echo -----------------------------
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
-  # should not use sudo here
-  # echo "Setting the default shell to $(which zsh)"
-  # sudo chsh -s $(which zsh) $USER
+  echo "Setting the default shell to $(which zsh)"
+  sudo chsh -s $(which zsh) $USER
 fi
 
 # -- Vim

@@ -69,6 +69,7 @@ pipx install pynvim
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 brew update
 brew install vim neovim graphviz httpie
