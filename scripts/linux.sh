@@ -56,6 +56,7 @@ And please login again
 fi
 
 sudo apt update
+sudo apt upgrade -y --with-new-pkgs
 
 # Install essential tools
 sudo apt install -y \
