@@ -16,9 +16,11 @@ Managing multiple systems (personal laptops, home servers, cloud instances) with
 
 - **Package Management**: Homebrew for both Linux and macOS
 - **Development Tools**: awscli, deno, Node.js (via nvm), vim, neovim
+- **Infrastructure Tools**: kubectl, opentofu (terraform)
 - **Shell**: zsh with oh-my-zsh, tmux
 - **Terminal**: Alacritty with custom configuration
 - **Utilities**: git, jq, httpie, fzf, and more
+- **Linux Development Role**: Docker, microk8s (optional)
 
 ## Supported Platforms
 
@@ -42,6 +44,14 @@ Full development environment with all tools:
 
 ```bash
 dotfiles/init.sh
+```
+
+### Linux Development Role
+
+Install additional development tools (Docker, microk8s, opentofu):
+
+```bash
+dotfiles/init.sh linuxdev
 ```
 
 
@@ -92,9 +102,10 @@ Log off and on again to use the env.
 ## Roadmap
 
 ### Current Development
-- 🔧 Homebrew-based package management (in progress)
-- 🔧 macOS support enhancement
-- 🔧 Alacritty terminal configuration
+- ✅ Homebrew-based package management
+- ✅ macOS support enhancement (karabiner-elements)
+- ✅ Alacritty terminal configuration
+- ✅ Linux development role with Docker and Kubernetes
 
 ### Planned Features
 - 📅 Windows WSL support
@@ -106,6 +117,6 @@ Log off and on again to use the env.
 ### Future Considerations
 - IDE configurations (VSCode, IntelliJ)
 - Language-specific environments (Python, Go, Rust)
-- Container orchestration tools (kubectl, helm)
+- Container orchestration tools (helm, k9s)
 - Cloud provider CLIs (gcloud, azure-cli)
 

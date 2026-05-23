@@ -16,22 +16,39 @@ if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
 
-ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
-distro_name=$(lsb_release -i|cut -f2)
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ "$distro_name" = "Ubuntu" ]; then
+role=${1:-base}
+
+if [ "$role" != "base" ]; then
+  echo "============================
+Role: $role
+============================="
+  if [ "$role" = "linuxdev" ]; then
+    echo "Will also install...
+  - opentofu (terraform)
+  - docker
+  - microk8s
+"
+  fi
+fi
+
+ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+distro_name=$(grep '^ID=' /etc/os-release | cut -d '=' -f2 | tr -d '"')
+
+if [ "$distro_name" = "ubuntu" ]; then
   perf_package=linux-tools-common
 else
   perf_package=linux-perf
 fi
 
 # Stop if sudo is unavailable
-if [ -z "$(sudo ls)" ]; then
-  echo "Please install sudo package"
+if ! sudo -n true 2>/dev/null; then
+  echo "Please install sudo package and configure sudo access"
   echo "eg.
 su -
 apt install sudo
-usermod -a -G sudo USER
+usermod -a -G sudo $USER
 ---
 And please login again
 "
@@ -45,7 +62,6 @@ sudo apt install -y \
   $perf_package \
   apt-transport-https \
   ca-certificates \
-  software-properties-common \
   git git-lfs \
   htop \
   python3-pip \
@@ -58,23 +74,46 @@ sudo apt install -y \
   silversearcher-ag \
   zsh \
   lshw \
-  net-tools
+  net-tools \
+  psmisc
+
+# Install software-properties-common if available
+if apt-cache show software-properties-common >/dev/null 2>&1; then
+  sudo apt install -y software-properties-common
+fi
+
+if [ "$role" = "linuxdev" ]; then
+  $DIR/install_microk8s.sh
+  $DIR/install_docker.sh
+fi
+
+# kubectl
+if [ -z "$(kubectl version --client 2> /dev/null)" ]; then
+  echo "Installing kubectl"
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$ARCH/kubectl"
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && rm kubectl
+fi
 
 if [ "$skip_devtools" ]; then exit 0; fi
 
 # Install dev tools
 
-pipx install pynvim
+sudo apt install -y python3-pynvim || pip3 install --user pynvim
+
+# Also install pynvim for brew python (needed by deoplete in brew vim)
+"$(brew --prefix python@3)/bin/pip3" install --break-system-packages pynvim 2>/dev/null || true
 
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  #/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 brew update
-brew install vim neovim graphviz httpie
+brew install vim neovim graphviz httpie opentofu
 
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
   brew install alacritty
 fi
+

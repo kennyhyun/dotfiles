@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+role=${1:-base}
+
 if [ "$PRODUCTION" ]; then
   skip_devtools=1
 fi
@@ -13,12 +16,24 @@ mkdir -p Downloads
 # Install system utils and Homebrew
 case $(uname -s) in
 Linux)
-  ~/dotfiles/scripts/linux.sh
+  ~/dotfiles/scripts/linux.sh $role
   ;;
 Darwin)
   ~/dotfiles/scripts/macos.sh
+  ~/dotfiles/scripts/macos-additional.sh || echo "skipping"
   ;;
 esac
+
+# Ensure brew is in PATH (installed in a subshell by platform scripts)
+if [ -z "$(which brew 2>/dev/null)" ]; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
+fi
 
 brew install awscli
 brew install deno
@@ -30,9 +45,11 @@ if [ -z "$(grep "$HOME/dotfiles/.zshrc" ~/.zshrc)" ]; then
 fi
 
 # Node.js with NVM
-if ! [ -d ~/.nvm ]; then
-  latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+if [ -z "$(nvm --version 2> /dev/null)" ]; then
+  if ! [ -d ~/.nvm/ ]; then
+    latest_nvm_version=$(curl -o- https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .name)
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/$latest_nvm_version/install.sh | bash
+  fi
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   nvm install 20
@@ -51,6 +68,8 @@ if ! [ -d ~/.oh-my-zsh ]; then
   echo
   echo -----------------------------
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended" || echo ""
+fi
+if [ -d ~/.oh-my-zsh ] && [ -z "$(echo $0|grep zsh)" ]; then
   echo "Setting the default shell to $(which zsh)"
   sudo chsh -s $(which zsh) $USER
 fi
@@ -77,8 +96,8 @@ if ! [ -d dotfiles/.fzf ]; then
 fi
 
 # Alacritty
-if [ -z "$(alacritty --version || echo '')" ]; then
-  if [ -d ~/dotfiles/.config/alacritty ]; then
+if [ -n "$(alacritty --version 2> /dev/null)" ]; then
+  if [ -d ~/.config/alacritty ]; then
     mv ~/.config/alacritty ~/.config/alacritty.old
   fi
   ln -sf dotfiles/alacritty .config/alacritty
@@ -180,6 +199,9 @@ echo ---------------------
 echo "
 ----------------------------
 Finished to initiate dotfiles, you can run this again if required.
+
+For more dev env, please consider running \"./scripts/linux.sh linuxdev\"
+
 Please log off and log in again, Thanks!!
 -----------------------------"
 

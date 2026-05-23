@@ -7,7 +7,13 @@ alias dm="docker-machine"
 alias dc="docker compose"
 alias dp="docker ps --format '{{.Names}}\t{{.Ports}}\t{{.Status}}\t{{.Image}}'"
 
+alias kc="kubectl"
+
 alias gwgrep='grep --color=auto --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=docker_node_modules_cache'
 alias gg="gwgrep"
 
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
