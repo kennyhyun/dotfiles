@@ -24,6 +24,11 @@ Darwin)
   ;;
 esac
 
+# Ensure brew is in PATH (installed in a subshell by platform scripts)
+if [ -z "$(which brew 2>/dev/null)" ]; then
+  source ~/.zshrc 2>/dev/null || true
+fi
+
 brew install awscli
 brew install deno
 
