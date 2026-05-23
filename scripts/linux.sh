@@ -74,7 +74,8 @@ sudo apt install -y \
   silversearcher-ag \
   zsh \
   lshw \
-  net-tools
+  net-tools \
+  psmisc
 
 # Install software-properties-common if available
 if apt-cache show software-properties-common >/dev/null 2>&1; then
@@ -98,6 +99,9 @@ if [ "$skip_devtools" ]; then exit 0; fi
 # Install dev tools
 
 sudo apt install -y python3-pynvim || pip3 install --user pynvim
+
+# Also install pynvim for brew python (needed by deoplete in brew vim)
+"$(brew --prefix python@3)/bin/pip3" install --break-system-packages pynvim 2>/dev/null || true
 
 # homebrew
 if [ -z "$(which brew || echo '')" ]; then
