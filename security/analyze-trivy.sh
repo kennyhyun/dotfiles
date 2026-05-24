@@ -9,12 +9,31 @@ TODAY=$(date +%Y-%m-%d)
 REVIEW_AFTER=$(date -d "+6 months" +%Y-%m-%d 2>/dev/null || date -v+6m +%Y-%m-%d)
 
 if [ ! -f "$REPORT" ]; then
-  echo "ERROR: trivy report not found: $REPORT" >&2
+  cat >&2 << 'GUIDE'
+ERROR: trivy report not found.
+
+To set up trivy scanning:
+  1. Install trivy:
+     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+
+  2. Add to root crontab (sudo crontab -e):
+     0 20 * * * /usr/local/bin/trivy rootfs / --pkg-types os --scanners vuln --format json --output /root/trivy-report.json > /root/trivy-report.log 2>&1
+
+  3. Run manually to generate first report:
+     sudo trivy rootfs / --pkg-types os --scanners vuln --format json --output /root/trivy-report.json
+GUIDE
   exit 1
 fi
 
 if ! command -v kiro &>/dev/null; then
-  echo "ERROR: kiro-cli not found" >&2
+  cat >&2 << 'GUIDE'
+ERROR: kiro-cli not found.
+
+To install kiro-cli:
+  https://kiro.dev/docs/getting-started/
+
+Then run this script again to analyze trivy results.
+GUIDE
   exit 1
 fi
 
