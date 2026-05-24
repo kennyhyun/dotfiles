@@ -22,6 +22,9 @@ echo "  vnstat 실행 중"
 # ── 4. fail2ban SSH 보호 ────────────────────────────────────
 echo "[4] fail2ban 설정..."
 sudo tee /etc/fail2ban/jail.d/sshd-local.conf > /dev/null << 'EOF'
+[DEFAULT]
+ignoreip = 127.0.0.1/8 ::1 192.168.0.0/16 10.0.0.0/8 172.16.0.0/12
+
 [sshd]
 enabled  = true
 maxretry = 5
