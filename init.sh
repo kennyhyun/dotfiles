@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-role=${1:-base}
+# roles: all args passed through to linux.sh (e.g. dev k8s server)
+ROLES=("$@")
 
 if [ "$PRODUCTION" ]; then
   skip_devtools=1
@@ -13,10 +14,10 @@ pushd ~
 mkdir -p Projects
 mkdir -p Downloads
 
-# Install system utils and Homebrew
+# Install system utils
 case $(uname -s) in
 Linux)
-  ~/dotfiles/scripts/linux.sh $role
+  ~/dotfiles/scripts/linux.sh "${ROLES[@]}"
   ;;
 Darwin)
   ~/dotfiles/scripts/macos.sh
@@ -200,7 +201,8 @@ echo "
 ----------------------------
 Finished to initiate dotfiles, you can run this again if required.
 
-For more dev env, please consider running \"./scripts/linux.sh linuxdev\"
+For more roles, run: ./scripts/linux.sh dev k8s gui server vpn
+  Remove a role:    ./scripts/linux.sh --remove dev
 
 Please log off and log in again, Thanks!!
 -----------------------------"
