@@ -122,8 +122,10 @@ brew update
 brew install vim neovim graphviz httpie opentofu
 
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
-  # install GUI apps
-  brew install alacritty
+  # install GUI apps (alacritty via snap on Linux, brew deprecated on macOS)
+  if command -v snap &>/dev/null; then
+    sudo snap install alacritty --classic 2>/dev/null || true
+  fi
 fi
 
 if [ "$role" = "public" ]; then
