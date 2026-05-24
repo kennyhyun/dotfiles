@@ -30,3 +30,21 @@ findtime = 10m
 EOF
 sudo systemctl enable --now fail2ban
 echo "  fail2ban 실행 중 (SSH 보호 활성)"
+
+# ── 5. trivy 취약점 스캐너 ───────────────────────────────────
+echo "[5] trivy 설치..."
+if ! command -v trivy &>/dev/null; then
+  curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+  echo "  trivy 설치 완료"
+else
+  echo "  trivy 이미 설치됨 ($(trivy --version 2>/dev/null | head -1))"
+fi
+
+# trivy crontab 등록 (root, 매일 20:00 UTC)
+TRIVY_CRON="0 20 * * * /usr/local/bin/trivy rootfs / --pkg-types os --scanners vuln --format json --output /root/trivy-report.json > /root/trivy-report.log 2>&1"
+if ! sudo crontab -l 2>/dev/null | grep -q "trivy-report.json"; then
+  (sudo crontab -l 2>/dev/null; echo "$TRIVY_CRON") | sudo crontab -
+  echo "  trivy crontab 등록 완료 (매일 20:00 UTC)"
+else
+  echo "  trivy crontab 이미 등록됨"
+fi
