@@ -31,6 +31,11 @@ Role: $role
   - microk8s
 "
   fi
+  if [ "$role" = "public" ]; then
+    echo "Will also apply...
+  - security/setup.sh (Suricata, ufw, vpn-monitor)
+"
+  fi
 fi
 
 ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
@@ -88,6 +93,9 @@ if [ "$role" = "linuxdev" ]; then
   $DIR/install_docker.sh
 fi
 
+# 공통 보안 설정 (모든 role)
+$DIR/../security/setup-common.sh
+
 # kubectl
 if [ -z "$(kubectl version --client 2> /dev/null)" ]; then
   echo "Installing kubectl"
@@ -116,5 +124,9 @@ brew install vim neovim graphviz httpie opentofu
 if ([[ -n "$DISPLAY" ]] && xset q >/dev/null 2>&1) || [[ -n "$WAYLAND_DISPLAY" ]]; then
   # install GUI apps
   brew install alacritty
+fi
+
+if [ "$role" = "public" ]; then
+  $DIR/../security/setup.sh
 fi
 
